@@ -19,3 +19,11 @@ pip3 install django
 python3 manage.py runserver 0.0.0.0:8000
 ```
 <p>8000 为端口号</p>
+
+<h2>4、域名访问</h2>
+
+<h3>1、Cloudflare</h3>
+<p>使用 Cloudflare 的 CDN，将 SSL/TLS 加密模式改为灵活</p>
+
+<h3>2、反向代理</h3>
+<p>安装 Nginx 或其他反向代理工具，将 http://127.0.0.1:8000 反代</p>
