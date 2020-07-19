@@ -8,5 +8,7 @@
 	pip3 install django
 
 <h2>3、运行程序</h2>
-	python3 manage.py runserver 0.0.0.0:8000
+```bash
+python3 manage.py runserver 0.0.0.0:8000
+```
 <p>8000 为端口号</p>
