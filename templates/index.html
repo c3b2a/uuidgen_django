@@ -15,11 +15,17 @@
 			margin: 0;
 			font-family: sans-serif;
 		}
+		.container {
+			position: relative;
+			width: 62.5%;
+			left: 18.75%;
+			transform: scale(1.6);
+		}
 		form {
-			width: 100%;
 			position: relative;
 			line-height: 200%;
-			transform: scale(1.6);
+			left: 50%;
+			transform: translate(-50%,0);
 		}
 		form select, form div, form button {
 			position: relative;
@@ -89,9 +95,12 @@
 			font-size: 2.5em;
 			font-weight: bold;
 		}
-		@media screen and (max-width: 64em) {
-			form {
+		@media screen and (max-width: 48em) {
+			.container {
 				transform: scale(1);
+			}
+			form {
+				width: 100%;
 			}
 		}
 	</style>
@@ -100,25 +109,27 @@
 		<div class="header">
 			<h1>UUID Generator</h1>
 		</div>
-		<form action="/" method="post">
-			{% csrf_token %}
-			<br><br>
-			<select name="mode_select">
-				{% for i in List %}
-					{% if forloop.counter != 2 %}
-						{% if i %}
-							<option value="uuid{{ forloop.counter }}" selected="selected" id="{{ forloop.counter }}">UUID {{ forloop.counter }}</option>
-						{% else %}
-							<option value="uuid{{ forloop.counter }}" id="{{ forloop.counter }}">UUID {{ forloop.counter }}</option>
+		<div class="container">
+			<form action="/" method="post">
+				{% csrf_token %}
+				<br><br>
+				<select name="mode_select">
+					{% for i in List %}
+						{% if forloop.counter != 2 %}
+							{% if i %}
+								<option value="uuid{{ forloop.counter }}" selected="selected" id="{{ forloop.counter }}">UUID {{ forloop.counter }}</option>
+							{% else %}
+								<option value="uuid{{ forloop.counter }}" id="{{ forloop.counter }}">UUID {{ forloop.counter }}</option>
+							{% endif %}
 						{% endif %}
-					{% endif %}
-				{% endfor %}
-			</select>
-			<pre></pre>
-			<div id="uuidDisplay">{{ uuid }}</div>
-			<pre></pre>
-			<button type="submit">生成</button>
-		</form>
+					{% endfor %}
+				</select>
+				<pre></pre>
+				<div id="uuidDisplay">{{ uuid }}</div>
+				<pre></pre>
+				<button type="submit">生成</button>
+			</form>
+		</div>
 	</body>
 	<script type="text/javascript">
 		getCookie = document.cookie.split('; ');
