@@ -16,8 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,re_path
 
-from . import views
+from . import views,api
 
 urlpatterns = [
     re_path(r'^$',views.display),
+    re_path(r'^api$',api.process),
 ]
