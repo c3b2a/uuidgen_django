@@ -1,0 +1,2 @@
+# uuidgen_django
+ 
