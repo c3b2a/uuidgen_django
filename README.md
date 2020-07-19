@@ -1,2 +1,1 @@
-# uuidgen_django
- 
+#UUID 生成器 (Django)
