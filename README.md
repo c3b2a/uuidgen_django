@@ -1,4 +1,6 @@
 <h1 style="font-family: sans-serif;">UUID 生成器 ( Django )</h1>
+<a href="https://uuid.ltd">https://uuid.ltd</a>
+
 
 <h2>1、获取源码</h2>
 
