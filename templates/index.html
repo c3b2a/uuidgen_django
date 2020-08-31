@@ -1,159 +1,160 @@
 <!DOCTYPE html>
 
 <html>
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<meta charset="utf-8">
-		<title>UUID Generator</title>
-	</head>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta charset="utf-8">
+        <title>UUID Generator</title>
+    </head>
 
-	<style type="text/css">
-		html {
-			background-color: #EEEEEE;
-		}
-		body {
-			margin: 0;
-			font-family: sans-serif;
-		}
-		.container {
-			position: relative;
-			width: 62.5%;
-			left: 18.75%;
-			transform: scale(1.6);
-		}
-		form {
-			position: relative;
-			line-height: 200%;
-			left: 50%;
-			transform: translate(-50%,0);
-		}
-		form select, form div, form button {
-			position: relative;
-			left: 50%;
-			transform: translate(-50%,0);
-		}
-		form select {
-			width: 96px;
-			height: 36px;
-			border: solid 1px #222222;
-			border-radius: 18px;
-			padding: 8px;
-			background-color: #FFFFFF80;
-			text-align: center;
-		}
-		form div {
-			font-family: monospace;
-			width: 320px;
-			height: 36px;
-			padding: 8px;
-			text-align: center;
-			border: solid 1px #222222;
-			border-radius: 18px;
-			background-color: #FFFFFF80;
-		}
-		form button {
-			width: 80px;
-			height: 36px;
-			border: solid 1px #222222;
-			padding: 8px;
-			text-align: center;
-			background-color: #FFFFFF80;
-			border-radius: 18px;
-			cursor: pointer;
-			z-index: 1;
-		}
-		form button:after, form button:before {
-			border-radius: 18px;
-			content: "";
-			position: absolute;
-			left: 0;
-			top: 0;
-			width: 0;
-			height: 100%;
-			background: #FFFFFF80;
-			z-index: -2;
-		}
-		form button:before {
-			border-radius: 18px;
-			transition: 0.3s ease;
-			background: #22DD2280;
-			z-index: -1;
-		}
-		form button:hover:after, form button:hover:before {
-			border-radius: 18px;
-			width: 100%;
-		}
-		.header {
-			background-color: #444444;
-			padding: 40px;
-			position: relative;
-			height: 50%;
-		}
-		.header h1 {
-			color: white;
-			text-align: center;
-			font-size: 2.5em;
-			font-weight: bold;
-		}
-		@media screen and (max-width: 48em) {
-			.container {
-				transform: scale(1);
-			}
-			form {
-				width: 100%;
-			}
-		}
-	</style>
+    <style type="text/css">
+        html {
+            background-color: #EEEEEE;
+        }
+        body {
+            margin: 0;
+            font-family: sans-serif;
+        }
+        .container {
+            position: relative;
+            width: 62.5%;
+            left: 18.75%;
+            transform: scale(1.6);
+        }
+        form {
+            position: relative;
+            line-height: 200%;
+            left: 50%;
+            transform: translate(-50%,0);
+        }
+        form select, form div, form button {
+            position: relative;
+            left: 50%;
+            transform: translate(-50%,0);
+        }
+        form select {
+            width: 96px;
+            height: 36px;
+            border: solid 1px #222222;
+            border-radius: 18px;
+            padding: 8px;
+            background-color: #FFFFFF80;
+            text-align: center;
+        }
+        form div {
+            font-family: monospace;
+            width: 320px;
+            height: 36px;
+            padding: 8px;
+            text-align: center;
+            border: solid 1px #222222;
+            border-radius: 18px;
+            background-color: #FFFFFF80;
+        }
+        form button {
+            width: 80px;
+            height: 36px;
+            border: solid 1px #222222;
+            padding: 8px;
+            text-align: center;
+            background-color: #FFFFFF80;
+            border-radius: 18px;
+            cursor: pointer;
+            z-index: 1;
+        }
+        form button:after, form button:before {
+            border-radius: 18px;
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 100%;
+            background: #FFFFFF80;
+            z-index: -2;
+        }
+        form button:before {
+            border-radius: 18px;
+            transition: 0.3s ease;
+            background: #22DD2280;
+            z-index: -1;
+        }
+        form button:hover:after, form button:hover:before {
+            border-radius: 18px;
+            width: 100%;
+        }
+        .header {
+            background-color: #444444;
+            padding: 40px;
+            position: relative;
+            height: 50%;
+        }
+        .header h1 {
+            color: white;
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+        @media screen and (max-width: 48em) {
+            .container {
+                transform: scale(1);
+            }
+            form {
+                width: 100%;
+            }
+        }
+    </style>
 
-	<body>
-		<div class="header">
-			<h1>UUID Generator</h1>
-		</div>
-		<div class="container">
-			<form action="/" method="post">
-				{% csrf_token %}
-				<br><br>
-				<select name="mode_select">
-					{% for i in List %}
-						{% if forloop.counter != 2 %}
-							{% if i %}
-								<option value="uuid{{ forloop.counter }}" selected="selected" id="{{ forloop.counter }}">UUID {{ forloop.counter }}</option>
-							{% else %}
-								<option value="uuid{{ forloop.counter }}" id="{{ forloop.counter }}">UUID {{ forloop.counter }}</option>
-							{% endif %}
-						{% endif %}
-					{% endfor %}
-				</select>
-				<pre></pre>
-				<div id="uuidDisplay">{{ uuid }}</div>
-				<pre></pre>
-				<button type="submit">Generate</button>
-			</form>
-		</div>
-	</body>
-	<script type="text/javascript">
-		getCookie = document.cookie.split('; ');
-		var uuidInCookie = false;
-		for (let i = 0;i < getCookie.length;i++) {
-			if (getCookie[i].split('=')[0] == 'uuid') {
-				uuidInCookie = true;
-				document.getElementById('uuidDisplay').innerHTML = getCookie[i].split('=')[1].split(':')[0];
-				document.getElementById(getCookie[i].split('=')[1].split(':')[1]).selected = true;
-				document.cookie = "uuid=; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
-				break;
-			}
-		}
-		if (!uuidInCookie) {
-			uuid = document.getElementById('uuidDisplay').innerHTML;
-			var which;
-			for (let i = 1;i <= 5;i++) {
-				if (i != 2 && document.getElementById(i).selected) {
-					which = i;
-				}
-			}
-			setCookie = 'uuid=' + uuid + ':' + which + ';';
-			document.cookie = setCookie;
-			window.location.replace('/');
-		}
-	</script>
+    <body>
+        <div class="header">
+            <h1>UUID Generator</h1>
+        </div>
+        <div class="container">
+            <form action="/" method="post">
+                {% csrf_token %}
+                <br><br>
+                <select name="mode_select">
+                    {% for i in List %}
+                        {% if forloop.counter != 2 %}
+                            {% if i %}
+                                <option value="uuid{{ forloop.counter }}" selected="selected" id="{{ forloop.counter }}">UUID {{ forloop.counter }}</option>
+                            {% else %}
+                                <option value="uuid{{ forloop.counter }}" id="{{ forloop.counter }}">UUID {{ forloop.counter }}</option>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <pre></pre>
+                <div><span id="uuidDisplay" style="display: none; ">{{ uuid }}</span></div>
+                <pre></pre>
+                <button type="submit">Generate</button>
+            </form>
+        </div>
+    </body>
+    <script type="text/javascript">
+        getCookie = document.cookie.split('; ')
+        var uuidInCookie = false
+        for (let i = 0; i < getCookie.length; i++) {
+            if (getCookie[i].split('=')[0] == 'uuid') {
+                uuidInCookie = true
+                document.getElementById('uuidDisplay').innerHTML = getCookie[i].split('=')[1].split(':')[0]
+                document.getElementById(getCookie[i].split('=')[1].split(':')[1]).selected = true
+                document.cookie = "uuid=; expires=Thu, 01 Jan 1970 00:00:00 GMT; "
+                break
+            }
+        }
+        if (!uuidInCookie) {
+            uuid = document.getElementById('uuidDisplay').innerHTML
+            var which
+            for (let i = 1; i <= 5; i++) {
+                if (i != 2 && document.getElementById(i).selected) {
+                    which = i
+                }
+            }
+            setCookie = 'uuid=' + uuid + ':' + which + ';'
+            document.cookie = setCookie
+            window.location.replace('/')
+        }
+        document.getElementById('uuidDisplay').style.display = "block"
+    </script>
 </html>
